@@ -1,0 +1,341 @@
+{
+  "version": "1.0.0",
+  "description": "Default configuration for Interchange Python Extension",
+  "last_updated": "2024-01-01T00:00:00Z",
+  
+  "watch_folders": [
+    {
+      "path": "D:/GameAssets/Characters/",
+      "category": "characters",
+      "enabled": true,
+      "recursive": true,
+      "added_time": "2024-01-01T00:00:00Z",
+      "description": "Character assets folder"
+    },
+    {
+      "path": "D:/GameAssets/Environments/",
+      "category": "environments", 
+      "enabled": true,
+      "recursive": true,
+      "added_time": "2024-01-01T00:00:00Z",
+      "description": "Environment assets folder"
+    },
+    {
+      "path": "D:/GameAssets/Props/",
+      "category": "props",
+      "enabled": true,
+      "recursive": true,
+      "added_time": "2024-01-01T00:00:00Z",
+      "description": "Prop assets folder"
+    }
+  ],
+  
+  "import_rules": {
+    "characters": {
+      "destination": "/Game/Characters/",
+      "auto_import": true,
+      "file_patterns": [
+        "*character*",
+        "*char*", 
+        "*hero*",
+        "*npc*",
+        "*player*"
+      ],
+      "translator_options": {
+        "EnableDetailedLogging": "true",
+        "ValidateInputFiles": "true",
+        "CreateBackups": "true",
+        "OverwriteExisting": "false"
+      },
+      "quality_checks": {
+        "max_file_size_mb": 50,
+        "required_keywords": ["character", "char"],
+        "validate_naming_convention": true
+      },
+      "post_import_actions": {
+        "generate_thumbnails": true,
+        "create_material_instances": true,
+        "setup_lod_chain": true
+      }
+    },
+    
+    "environments": {
+      "destination": "/Game/Environments/",
+      "auto_import": true,
+      "file_patterns": [
+        "*env*",
+        "*environment*",
+        "*level*",
+        "*scene*",
+        "*landscape*",
+        "*terrain*"
+      ],
+      "translator_options": {
+        "EnableDetailedLogging": "true",
+        "ValidateInputFiles": "true",
+        "CreateBackups": "false",
+        "OverwriteExisting": "true"
+      },
+      "quality_checks": {
+        "max_file_size_mb": 100,
+        "validate_lightmap_uvs": true
+      },
+      "post_import_actions": {
+        "generate_thumbnails": true,
+        "setup_collision": true,
+        "optimize_for_distance": true
+      }
+    },
+    
+    "props": {
+      "destination": "/Game/Props/",
+      "auto_import": true,
+      "file_patterns": [
+        "*prop*",
+        "*object*",
+        "*item*",
+        "*furniture*",
+        "*decoration*"
+      ],
+      "translator_options": {
+        "EnableDetailedLogging": "true",
+        "ValidateInputFiles": "true",
+        "CreateBackups": "false"
+      },
+      "quality_checks": {
+        "max_file_size_mb": 25,
+        "max_triangle_count": 10000
+      },
+      "post_import_actions": {
+        "generate_thumbnails": true,
+        "setup_collision": true,
+        "create_instanced_variants": true
+      }
+    },
+    
+    "weapons": {
+      "destination": "/Game/Weapons/",
+      "auto_import": true,
+      "file_patterns": [
+        "*weapon*",
+        "*gun*",
+        "*rifle*",
+        "*pistol*",
+        "*sword*",
+        "*knife*",
+        "*bow*"
+      ],
+      "translator_options": {
+        "EnableDetailedLogging": "true",
+        "ValidateInputFiles": "true",
+        "CreateBackups": "true"
+      },
+      "quality_checks": {
+        "max_file_size_mb": 30,
+        "required_keywords": ["weapon"],
+        "validate_attachment_points": true
+      },
+      "post_import_actions": {
+        "generate_thumbnails": true,
+        "setup_physics": true,
+        "create_attachment_sockets": true
+      }
+    },
+    
+    "vehicles": {
+      "destination": "/Game/Vehicles/",
+      "auto_import": true,
+      "file_patterns": [
+        "*vehicle*",
+        "*car*",
+        "*truck*",
+        "*bike*",
+        "*aircraft*",
+        "*ship*"
+      ],
+      "translator_options": {
+        "EnableDetailedLogging": "true",
+        "ValidateInputFiles": "true",
+        "CreateBackups": "true"
+      },
+      "quality_checks": {
+        "max_file_size_mb": 75,
+        "validate_wheel_sockets": true,
+        "validate_interior": true
+      },
+      "post_import_actions": {
+        "generate_thumbnails": true,
+        "setup_physics": true,
+        "create_wheel_sockets": true,
+        "setup_interior_collision": true
+      }
+    }
+  },
+  
+  "quality_checks": {
+    "enabled": true,
+    "global_settings": {
+      "max_file_size_mb": 100,
+      "min_file_size_bytes": 1024,
+      "allowed_extensions": [".foo", ".bar", ".custom"],
+      "blocked_extensions": [".exe", ".bat", ".cmd"],
+      "scan_for_viruses": false,
+      "validate_file_integrity": true,
+      "check_file_permissions": true,
+      "validate_utf8_encoding": false
+    },
+    "mesh_validation": {
+      "max_triangle_count": 50000,
+      "min_triangle_count": 10,
+      "validate_normals": true,
+      "validate_uvs": true,
+      "check_degenerate_triangles": true,
+      "validate_vertex_colors": false
+    },
+    "texture_validation": {
+      "max_resolution": 4096,
+      "min_resolution": 32,
+      "power_of_two_required": true,
+      "validate_compression": true,
+      "check_alpha_channel": true
+    },
+    "naming_conventions": {
+      "enforce_naming": true,
+      "allowed_characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-",
+      "max_name_length": 64,
+      "require_prefix": false,
+      "forbidden_words": ["temp", "test", "debug"]
+    }
+  },
+  
+  "performance": {
+    "import_settings": {
+      "max_concurrent_imports": 4,
+      "processing_delay_seconds": 1.0,
+      "batch_size": 10,
+      "timeout_seconds": 300,
+      "retry_attempts": 3,
+      "retry_delay_seconds": 5.0
+    },
+    "memory_management": {
+      "max_memory_usage_mb": 2048,
+      "garbage_collect_interval": 50,
+      "clear_cache_interval": 100,
+      "monitor_memory_usage": true
+    },
+    "threading": {
+      "use_background_threads": true,
+      "thread_pool_size": 4,
+      "priority": "normal"
+    }
+  },
+  
+  "logging": {
+    "enabled": true,
+    "log_level": "INFO",
+    "log_to_file": true,
+    "log_file_path": "interchange_python.log",
+    "max_log_file_size_mb": 10,
+    "log_rotation_count": 5,
+    "include_timestamps": true,
+    "include_thread_info": false,
+    "log_categories": {
+      "import_operations": true,
+      "file_monitoring": true,
+      "quality_checks": true,
+      "performance_metrics": true,
+      "error_details": true
+    }
+  },
+  
+  "notifications": {
+    "enabled": true,
+    "methods": {
+      "console_output": true,
+      "log_file": true,
+      "unreal_output_log": true,
+      "email": false,
+      "slack": false
+    },
+    "events": {
+      "import_success": false,
+      "import_failure": true,
+      "batch_completion": true,
+      "quality_check_failure": true,
+      "system_errors": true,
+      "performance_warnings": true
+    },
+    "email_settings": {
+      "smtp_server": "",
+      "smtp_port": 587,
+      "username": "",
+      "password": "",
+      "recipients": []
+    },
+    "slack_settings": {
+      "webhook_url": "",
+      "channel": "#asset-pipeline",
+      "username": "Interchange Bot"
+    }
+  },
+  
+  "backup": {
+    "enabled": false,
+    "backup_directory": "D:/Backups/InterchangeAssets/",
+    "backup_before_import": false,
+    "backup_failed_imports": true,
+    "max_backup_age_days": 30,
+    "max_backup_size_gb": 10,
+    "compression_enabled": true
+  },
+  
+  "integration": {
+    "version_control": {
+      "enabled": false,
+      "system": "perforce",
+      "auto_checkout": false,
+      "auto_submit": false,
+      "changelist_description": "Automated asset import via Interchange Python"
+    },
+    "asset_database": {
+      "enabled": false,
+      "database_type": "sqlite",
+      "connection_string": "",
+      "track_import_history": true,
+      "track_usage_statistics": true
+    },
+    "external_tools": {
+      "texture_optimizer": {
+        "enabled": false,
+        "executable_path": "",
+        "command_line_args": ""
+      },
+      "mesh_optimizer": {
+        "enabled": false,
+        "executable_path": "",
+        "command_line_args": ""
+      }
+    }
+  },
+  
+  "advanced": {
+    "experimental_features": {
+      "ai_asset_classification": false,
+      "predictive_import_rules": false,
+      "automatic_lod_generation": false,
+      "smart_material_assignment": false
+    },
+    "debug_settings": {
+      "enable_debug_mode": false,
+      "verbose_logging": false,
+      "save_intermediate_files": false,
+      "profile_performance": false
+    },
+    "custom_scripts": {
+      "pre_import_script": "",
+      "post_import_script": "",
+      "batch_completion_script": "",
+      "error_handling_script": ""
+    }
+  }
+}
